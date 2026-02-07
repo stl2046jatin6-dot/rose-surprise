@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You 🌹</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:white;
+}
+
+/* Floating hearts */
+.heart {
+    position:absolute;
+    bottom:-20px;
+    font-size:20px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from {transform: translateY(0); opacity:1;}
+    to {transform: translateY(-110vh); opacity:0;}
+}
+
+/* Card */
+.card {
+    width:90%;
+    max-width:360px;
+    padding:35px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    text-align:center;
+    animation: fadeIn 1s ease;
+}
+
+h1, h2 {
+    margin:0;
+}
+
+button {
+    margin-top:25px;
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    background:white;
+    color:#ff4d6d;
+    cursor:pointer;
+    font-weight:500;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+button:hover {
+    transform:scale(1.05);
+}
+
+.gift {
+    font-size:75px;
+    cursor:pointer;
+    margin-top:20px;
+    animation:bounce 1.5s infinite;
+}
+
+.rose {
+    font-size:90px;
+    display:none;
+    margin-top:15px;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(20px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+@keyframes bounce {
+    0%,100% {transform:translateY(0);}
+    50% {transform:translateY(-10px);}
+}
+</style>
+</head>
+<body>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="content">
+    <h1>Happy Rose Day<br>to the most precious person of my life 🌹</h1>
+    <button onclick="nextStep()">Next</button>
+</div>
+
+<script>
+let step = 0;
+
+function nextStep() {
+    step++;
+    const content = document.getElementById("content");
+
+    if(step === 1){
+        content.innerHTML = `
+        <h1>Love you ❤😘</h1>
+        <button onclick="nextStep()">Next</button>
+        `;
+    }
+
+    else if(step === 2){
+        content.innerHTML = `
+        <div class="gift" onclick="openGift()">🎁</div>
+        <div class="rose" id="rose">🌹</div>
+        <h2 id="love2" style="display:none;">Love you so much ❤😊</h2>
+        <button id="nextBtn" style="display:none;" onclick="nextStep()">Next</button>
+        `;
+    }
+
+    else if(step === 3){
+        content.innerHTML = `
+        <h2>
+        Pata nahi kab tum meri aadat ban gayi,<br>
+        kab tumhari baatein mere din ka sabse accha hissa ban gayi.<br>
+        Main bas itna jaanta hoon ki tumhari smile dekhkar dil ko sukoon milta hai.<br><br>
+
+        Aaj Rose Day par koi bada wada ya pressure nahi dena,<br>
+        bas ek choti si feeling share karni thi…<br>
+        ki tum mere liye sach me bahut special ho. 🌹<br><br>
+
+        <strong>Mera pyara billu ❤</strong><br>
+        Ye aapke paglu ki taraf se aapke liye chota sa surprise 🤭❤✨🎀🧿
+        </h2>
+        `;
+    }
+}
+
+function openGift(){
+    document.querySelector('.gift').style.display='none';
+    document.getElementById('rose').style.display='block';
+    document.getElementById('love2').style.display='block';
+    document.getElementById('nextBtn').style.display='inline-block';
+}
+
+/* Floating hearts generator */
+setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (3+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+},500);
+</script>
+
+</body>
+</html>
